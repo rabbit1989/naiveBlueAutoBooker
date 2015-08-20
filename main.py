@@ -12,6 +12,8 @@ class MyHTMLParser(HTMLParser):
 			self.token = attrs[2][1]
 			print('find token: ', self.token)
 
+		print tag, attrs
+
 	def handle_endtag(self, tag):
 		pass
 	def handle_data(self, data):
@@ -34,6 +36,8 @@ if __name__ == '__main__':
 	r_login_res = requests.post("http://r.naiveblue.com/index.php/login/Index", headers = headers, data=params)	
 	f = open('naive_blue_book_page.html', 'w')
 	f.write(r_login_res.content)
-#	r = requests.post("http://r.naiveblue.com/index.php/login/index")
-#	f = open('login_result', 'w')
-#	f.write(r.content)
+
+	for i in xrange(5):
+		print 'parsing r_login_res'
+
+	parser.feed(r_login_res.content)
